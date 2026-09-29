@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Oilaviy Xarajatlar Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-wrapper">
+    <!-- Mobil Ilova Header qismi -->
+    <header class="app-header">
+      <div class="header-inner">
+        <div>
+          <h1 class="app-title">Oilaviy Xisob</h1>
+          <p class="app-subtitle" id="currentMonthYear">Oylik xarajatlar nazorati</p>
+        </div>
+        <button type="button" class="btn btn-secondary btn-xs" id="quickBudgetBtn">
+          Byudjet
+        </button>
+      </div>
+    </header>
+
+    <!-- Asosiy Sahifalar (Tab Panes) -->
+    <main class="app-content">
+
+      <!-- ==============================================
+           1-SAHIFA: BOSH SAHIFA / UMUMIY DASHBOARD
+           ============================================== -->
+      <section id="tab-dashboard" class="tab-pane active">
+        <!-- Byudjet va Asosiy Hisobot Kartasi -->
+        <div class="card budget-card">
+          <div class="budget-header">
+            <div>
+              <span class="badge-label">Oylik nazorat</span>
+              <h2 class="budget-card-title">Byudjet holati</h2>
+            </div>
+            <button type="button" class="btn btn-secondary btn-sm" id="toggleBudgetBtn">
+              O'zgartirish
+            </button>
+          </div>
+
+          <!-- Byudjet kiritish / tahrirlash paneli -->
+          <div class="budget-edit-panel" id="budgetEditPanel" style="display: none;">
+            <label for="monthlyBudgetInput" class="budget-input-label">Oylik byudjet miqdori (so'm):</label>
+            <div class="budget-form-inline">
+              <input 
+                type="number" 
+                id="monthlyBudgetInput" 
+                placeholder="Masalan: 5000000" 
+                min="0" 
+                step="1000"
+              >
+              <button type="button" class="btn btn-primary btn-sm" id="saveBudgetBtn">Saqlash</button>
+              <button type="button" class="btn btn-secondary btn-sm" id="cancelBudgetBtn">Bekor</button>
+            </div>
+          </div>
+
+          <!-- 3 ta asosiy ko'rsatkich -->
+          <div class="budget-stats-grid">
+            <div class="stat-box">
+              <span class="stat-label">Oylik byudjet</span>
+              <div class="stat-value" id="budgetAmount">Belgilanmagan</div>
+              <span class="stat-status" id="budgetStatus">Limit yo'q</span>
+            </div>
+
+            <div class="stat-box">
+              <span class="stat-label">Jami xarajat</span>
+              <div class="stat-value" id="totalAmount">0 so'm</div>
+              <span class="stat-status" id="totalCount">0 ta xarajat</span>
+            </div>
+
+            <div class="stat-box" id="remainingStatBox">
+              <span class="stat-label" id="remainingLabel">Qoldiq mablag'</span>
+              <div class="stat-value" id="remainingAmount">—</div>
+              <span class="stat-status" id="remainingStatus">Byudjet belgilanmagan</span>
+            </div>
+          </div>
+
+          <!-- Byudjet sarflanishi (Progress Bar) -->
+          <div class="budget-progress-section" id="budgetProgressSection">
+            <div class="progress-info-row">
+              <span class="progress-title" id="progressPercentageText">Byudjet sarflanishi: 0%</span>
+              <span class="progress-detail" id="progressRemainingText">0 so'm qoldi</span>
+            </div>
+            <div class="progress-track">
+              <div class="progress-fill" id="progressBarFill" style="width: 0%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kategoriyalar bo'yicha taqsimot -->
+        <div class="card">
+          <h2 class="section-title">Kategoriyalar bo'yicha taqsimot</h2>
+          <div class="category-grid" id="categoryGrid">
+            <!-- JS orqali to'ldiriladi -->
+          </div>
+        </div>
+
+        <!-- So'nggi xarajatlar qisqa bloki -->
+        <div class="card recent-expenses-card">
+          <div class="card-header-flex">
+            <h2 class="section-title mb-0">Oxirgi xarajatlar</h2>
+            <button type="button" class="link-btn" id="goToHistoryLink">Barchasi &rarr;</button>
+          </div>
+          <div class="expense-list recent-list" id="recentExpenseList">
+            <!-- JS orqali oxirgi 3 ta xarajat chiqariladi -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ==============================================
+           2-SAHIFA: YANGI XARAJAT QO'SHISH FORMALARI
+           ============================================== -->
+      <section id="tab-add" class="tab-pane">
+        <div class="card form-card">
+          <h2 class="section-title">Yangi xarajat qo'shish</h2>
+          <p class="section-desc">Kiritilgan xarajat darhol hisob-kitob qilinadi va saqlanadi.</p>
+
+          <form id="expenseForm" autocomplete="off">
+            <div class="form-group">
+              <label for="expenseName">Xarajat nomi</label>
+              <input 
+                type="text" 
+                id="expenseName" 
+                placeholder="Masalan: Bozorlik, Go'sht, Taxi..." 
+                required
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="expenseAmount">Summasi (so'mda)</label>
+              <input 
+                type="number" 
+                id="expenseAmount" 
+                placeholder="Masalan: 85000" 
+                min="1" 
+                step="any"
+                required
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="expenseCategory">Kategoriya</label>
+              <select id="expenseCategory" required>
+                <option value="" disabled selected>Kategoriyani tanlang</option>
+                <option value="Ta'lim">Ta'lim</option>
+                <option value="Transport">Transport</option>
+                <option value="Uy-ro'zg'or">Uy-ro'zg'or</option>
+                <option value="Kredit/Qarz">Kredit/Qarz</option>
+                <option value="Sog'liq">Sog'liq</option>
+                <option value="Boshqa">Boshqa</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-large" id="submitBtn">
+              + Xarajatni qo'shish
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <!-- ==============================================
+           3-SAHIFA: BARCHA XARAJATLAR TARIXI
+           ============================================== -->
+      <section id="tab-history" class="tab-pane">
+        <div class="card list-card">
+          <div class="list-header">
+            <div>
+              <h2 class="section-title mb-0">Xarajatlar tarixi</h2>
+              <span class="history-count-badge" id="historyCountBadge">0 ta yozuv</span>
+            </div>
+            <button type="button" class="btn btn-secondary btn-sm" id="clearAllBtn" style="display: none;">
+              Barchasini tozalash
+            </button>
+          </div>
+
+          <div class="expense-list" id="expenseList">
+            <!-- JS orqali to'ldiriladi -->
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ==============================================
+         EKRAN PASTIDAGI MOBILE APP TUGMALARI (BOTTOM NAV)
+         ============================================== -->
+    <nav class="bottom-nav">
+      <button type="button" class="nav-btn active" data-tab="tab-dashboard" id="navDashboard">
+        <span class="nav-icon">📊</span>
+        <span class="nav-label">Asosiy</span>
+      </button>
+
+      <button type="button" class="nav-btn nav-btn-add" data-tab="tab-add" id="navAdd">
+        <span class="nav-add-circle">+</span>
+        <span class="nav-label">Qo'shish</span>
+      </button>
+
+      <button type="button" class="nav-btn" data-tab="tab-history" id="navHistory">
+        <span class="nav-icon">📋</span>
+        <span class="nav-label">Tarix</span>
+      </button>
+    </nav>
+
+    <!-- Xabarnoma (Toast) -->
+    <div class="toast" id="toastMessage">Xarajat qo'shildi!</div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

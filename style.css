@@ -1,0 +1,766 @@
+/* ==========================================================
+   OILAVIY XARAJATLAR TRACKER - MOBILE APP EDITION
+   Minimalist, Qat'iy & Mobil Ergonomik CSS
+   ========================================================== */
+
+/* Universal Reset & Base Variables */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+  --color-bg: #ececf0;
+  --color-surface: #ffffff;
+  --color-surface-soft: #f8fafc;
+  --color-text-main: #111827;
+  --color-text-muted: #6b7280;
+  --color-border: #111827;
+  --color-border-light: #e5e7eb;
+  --color-primary: #111827;
+  --color-primary-hover: #1f2937;
+  --color-danger: #dc2626;
+  --color-danger-hover: #b91c1c;
+  --color-danger-bg: #fef2f2;
+  --color-badge-bg: #f3f4f6;
+
+  --border-width: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+
+  --shadow-block: 3px 3px 0px var(--color-border);
+  --shadow-block-sm: 2px 2px 0px var(--color-border);
+
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--color-bg);
+  color: var(--color-text-main);
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* Mobil Ilova Ramkasi (Mobile Container) */
+.app-wrapper {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background-color: var(--color-surface);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border-left: var(--border-width) solid var(--color-border);
+  border-right: var(--border-width) solid var(--color-border);
+  box-shadow: 0 0 24px rgba(0, 0, 0, 0.08);
+}
+
+/* Header qismi */
+.app-header {
+  background-color: var(--color-surface);
+  border-bottom: var(--border-width) solid var(--color-border);
+  padding: 12px 16px;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.app-title {
+  font-size: 1.15rem;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+  text-transform: uppercase;
+  color: var(--color-text-main);
+  line-height: 1.1;
+}
+
+.app-subtitle {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+/* Asosiy Content va Tablar */
+.app-content {
+  flex: 1;
+  padding: 14px 12px;
+  padding-bottom: 90px; /* Pastki navigatsiya uchun joy */
+}
+
+.tab-pane {
+  display: none;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tab-pane.active {
+  display: flex;
+  animation: fadeIn 0.15s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Kartalar (Cards) */
+.card {
+  background-color: var(--color-surface);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-block);
+  padding: 14px;
+}
+
+.section-title {
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: -0.2px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  color: var(--color-text-main);
+}
+
+.section-title.mb-0 {
+  margin-bottom: 0;
+}
+
+.section-desc {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin-bottom: 14px;
+}
+
+.card-header-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.link-btn {
+  background: none;
+  border: none;
+  color: var(--color-primary);
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 800;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 2px 4px;
+}
+
+/* Byudjet Kartasi (1-tab) */
+.budget-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.budget-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  border-bottom: var(--border-width) solid var(--color-border-light);
+}
+
+.badge-label {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--color-text-muted);
+}
+
+.budget-card-title {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--color-text-main);
+  line-height: 1.1;
+}
+
+/* Byudjet tahrirlash paneli */
+.budget-edit-panel {
+  background-color: var(--color-badge-bg);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.budget-input-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.budget-form-inline {
+  display: flex;
+  gap: 8px;
+}
+
+.budget-form-inline input {
+  flex: 1;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 8px 10px;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-md);
+  outline: none;
+}
+
+/* 3 ta ixcham statistika bloklari (Mobile) */
+.budget-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.stat-box {
+  background-color: #fafafa;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 10px 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2px;
+  text-align: center;
+}
+
+.stat-label {
+  font-size: 0.62rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--color-text-muted);
+}
+
+.stat-value {
+  font-size: 0.95rem;
+  font-weight: 900;
+  line-height: 1.15;
+  color: var(--color-text-main);
+  word-break: break-word;
+}
+
+.stat-status {
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.stat-box.success-box {
+  border-color: #15803d;
+  background-color: #f0fdf4;
+}
+
+.stat-box.success-box .stat-value {
+  color: #15803d;
+}
+
+.stat-box.success-box .stat-status {
+  color: #166534;
+}
+
+.stat-box.danger-box {
+  border-color: var(--color-danger);
+  background-color: var(--color-danger-bg);
+}
+
+.stat-box.danger-box .stat-label {
+  color: var(--color-danger);
+}
+
+.stat-box.danger-box .stat-value {
+  color: var(--color-danger);
+}
+
+.stat-box.danger-box .stat-status {
+  color: var(--color-danger-hover);
+}
+
+/* Byudjet progress bar */
+.budget-progress-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 6px;
+  border-top: var(--border-width) solid var(--color-border-light);
+}
+
+.progress-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.progress-title {
+  color: var(--color-text-main);
+}
+
+.progress-detail {
+  color: var(--color-text-muted);
+}
+
+.progress-track {
+  width: 100%;
+  height: 10px;
+  background-color: #e5e7eb;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: var(--color-primary);
+  width: 0%;
+  transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.progress-fill.warning {
+  background-color: #d97706;
+}
+
+.progress-fill.danger {
+  background-color: var(--color-danger);
+}
+
+/* Kategoriyalar bo'yicha taqsimot (Grid) */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.category-badge-card {
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 8px 10px;
+  background-color: var(--color-badge-bg);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.category-name {
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  letter-spacing: 0.4px;
+}
+
+.category-sum {
+  font-size: 0.95rem;
+  font-weight: 900;
+  color: var(--color-text-main);
+}
+
+.category-percentage {
+  font-size: 0.65rem;
+  color: var(--color-text-muted);
+  font-weight: 700;
+}
+
+/* 2-tab: Xarajat qo'shish formasi */
+.form-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.form-group label {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--color-text-main);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.form-group input,
+.form-group select {
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 12px 14px;
+  background-color: var(--color-surface);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text-main);
+  outline: none;
+  width: 100%;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  background-color: #fafafa;
+  border-color: #000000;
+  box-shadow: 0 0 0 1px #000000;
+}
+
+/* Tugmalar */
+.btn {
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  padding: 10px 14px;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  background-color: var(--color-primary);
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.1s ease;
+  user-select: none;
+}
+
+.btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: none !important;
+}
+
+.btn-primary {
+  box-shadow: var(--shadow-block-sm);
+}
+
+.btn-primary.btn-large {
+  width: 100%;
+  padding: 14px;
+  font-size: 0.95rem;
+  box-shadow: var(--shadow-block);
+  margin-top: 4px;
+}
+
+.btn-secondary {
+  background-color: var(--color-surface);
+  color: var(--color-text-main);
+  box-shadow: var(--shadow-block-sm);
+}
+
+.btn-secondary:hover {
+  background-color: #f3f4f6;
+}
+
+.btn-sm {
+  padding: 6px 10px;
+  font-size: 0.72rem;
+}
+
+.btn-xs {
+  padding: 4px 8px;
+  font-size: 0.7rem;
+}
+
+.btn-delete {
+  background-color: transparent;
+  color: var(--color-danger);
+  border: var(--border-width) solid var(--color-danger);
+  border-radius: var(--radius-sm);
+  padding: 4px 8px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.1s ease;
+  white-space: nowrap;
+}
+
+.btn-delete:hover {
+  background-color: var(--color-danger);
+  color: #ffffff;
+}
+
+.btn-delete:active {
+  transform: translate(1px, 1px);
+}
+
+/* 3-tab: Xarajatlar ro'yxati */
+.list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: var(--border-width) solid var(--color-border-light);
+}
+
+.history-count-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+
+.expense-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.expense-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: #ffffff;
+}
+
+.expense-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+  padding-right: 10px;
+}
+
+.expense-title {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--color-text-main);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.expense-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.expense-category-tag {
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 1px 5px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-badge-bg);
+}
+
+.expense-date {
+  font-size: 0.68rem;
+  color: var(--color-text-muted);
+}
+
+.expense-action-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.expense-amount-tag {
+  font-size: 0.95rem;
+  font-weight: 900;
+  color: var(--color-text-main);
+  white-space: nowrap;
+}
+
+/* Bo'sh ro'yxat holati */
+.empty-state {
+  text-align: center;
+  padding: 28px 12px;
+  color: var(--color-text-muted);
+  border: 2px dashed var(--color-border-light);
+  border-radius: var(--radius-md);
+}
+
+.empty-state-title {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--color-text-main);
+  margin-bottom: 2px;
+}
+
+.empty-state-desc {
+  font-size: 0.78rem;
+}
+
+/* ==========================================================
+   MOBILE APP PASTKI NAVIGATSIYA PANELI (BOTTOM NAV)
+   ========================================================== */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background-color: var(--color-surface);
+  border-top: var(--border-width) solid var(--color-border);
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: center;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Mobil ramka chegarasida cheklash */
+@media (min-width: 481px) {
+  .bottom-nav {
+    left: 50%;
+    transform: translateX(-50%);
+    width: 480px;
+    border-left: var(--border-width) solid var(--color-border);
+    border-right: var(--border-width) solid var(--color-border);
+  }
+}
+
+.bottom-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  height: 62px;
+  width: 100%;
+  max-width: 480px;
+}
+
+.nav-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text-muted);
+  font-family: inherit;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  gap: 2px;
+  position: relative;
+  transition: all 0.12s ease;
+  user-select: none;
+}
+
+.nav-btn .nav-icon {
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+.nav-btn.active {
+  color: var(--color-text-main);
+  background-color: #fafafa;
+}
+
+.nav-btn.active::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 20%;
+  right: 20%;
+  height: 3px;
+  background-color: var(--color-border);
+}
+
+/* O'rtadagi bo'rtib turuvchi "+ Qo'shish" tugmasi */
+.nav-btn-add {
+  overflow: visible;
+}
+
+.nav-add-circle {
+  width: 38px;
+  height: 38px;
+  background-color: var(--color-primary);
+  color: #ffffff;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 900;
+  line-height: 1;
+  margin-top: -14px;
+  box-shadow: var(--shadow-block-sm);
+  transition: transform 0.1s ease;
+}
+
+.nav-btn-add:active .nav-add-circle {
+  transform: scale(0.92);
+}
+
+.nav-btn-add.active .nav-add-circle {
+  background-color: #000000;
+  transform: scale(1.05);
+}
+
+/* Toast Xabarnomasi */
+.toast {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-60px);
+  background-color: var(--color-primary);
+  color: #ffffff;
+  padding: 10px 18px;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: 999px;
+  box-shadow: var(--shadow-block);
+  font-size: 0.82rem;
+  font-weight: 800;
+  z-index: 1000;
+  pointer-events: none;
+  opacity: 0;
+  transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.25s ease;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Mobil chet chegaralarini olib tashlash */
+@media (max-width: 480px) {
+  body {
+    background-color: var(--color-surface);
+  }
+
+  .app-wrapper {
+    border-left: none;
+    border-right: none;
+    box-shadow: none;
+  }
+}
